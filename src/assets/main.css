@@ -11,3 +11,8 @@
     width: 1200px;
     margin: 0 auto;
 }
+
+.border-black {
+    background-color: beige;
+    border: 1px solid black;
+  }

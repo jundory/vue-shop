@@ -1,19 +1,15 @@
 <template>
     <!-- 사용한 기능 : v-for, define(Props/Emits) -->
     <div class="wrap">
-            {{ modalData }}
-
             <Modal 
             v-if="isToggle"
             :burger-data="modalData"
             @emitModal="closeModal"
             />
 
-
-
             <div class="container">
                 <div 
-                v-for="burger in menu" 
+                v-for="burger in items" 
                 :key="burger"
                 >
                     <div> 
@@ -26,12 +22,12 @@
     </div>
 </template>
 <script setup>
-    import {ref} from 'vue'
+    import {reactive, ref} from 'vue'
     import Modal from '../Modal/OrderModal.vue'
+    import {burgerArr} from '../common'
     // const printLog = ref(menu);
     const isToggle = ref(false);
     const modalData = ref('');
-
 
     // onMounted(()=>console.log(printLog.value));
 
@@ -44,24 +40,7 @@
         isToggle.value = boolean;
     }
 
-    const menu = ref([
-        {
-            name: "cheese",
-            price: 4000
-        },
-        {
-            name: "shrimp",
-            price: 5000
-        },
-        {
-            name: "classic",
-            price: 2500
-        },
-        {
-            name: "chicken",
-            price: 6000
-        }
-    ]);
+    const items = reactive(burgerArr);   //가져온 버거배열
 </script>
 
 <style scoped>

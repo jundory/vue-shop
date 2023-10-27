@@ -15,7 +15,7 @@
 
             </div>
 
-            <div class="container" v-else> 장바구니가 비어있습니다. </div>
+            <div class="container" v-else> 장바구니가 비어 있습니다. </div>
         </div>
     </div>
 </template>
@@ -56,5 +56,7 @@
 
         width: 1200px;
         margin: 0 auto;
+
+        text-align: center;
     }
 </style>
