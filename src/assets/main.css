@@ -1,0 +1,13 @@
+.wrap {
+    position: relative;
+    z-index: 3;
+    height: 85px;
+    background: #fff;
+    text-align: center;
+}
+.inner-box {
+    display: flex;
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
