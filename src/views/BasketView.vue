@@ -20,7 +20,7 @@
                     <br />
                     <span>총 가격 : {{ item.total }}원</span>
                     <br />
-                    <button @click="removeItem(item)"> 
+                    <button @click="removeItem(item.key)"> 
                         삭제
                     </button>
                 </div>
@@ -49,8 +49,9 @@
         : items.value = store.getters.getBasket;
     }
     
-    const removeItem = (remove) => {
-        store.dispatch('removeBasket', remove);
+    const removeItem = (key) => {
+        console.log("key",key);
+        store.dispatch('removeBasket', key);
         //삭제한거 화면에 반영
         checkStore()
         console.log("삭제 후 장바구니 품목",store.getters.getBasket)

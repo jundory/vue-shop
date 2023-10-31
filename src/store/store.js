@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 
 const store = createStore({
   state: {
+    index: 1,
     basket: []
   },
   getters: {
@@ -12,10 +13,13 @@ const store = createStore({
   mutations: {
     //commit으로 접근
     pushBasket(state, value) {
+      value.key = state.index;
+      state.index++
       state.basket.push(value)
     },
-    changeBasket(state, data) {
-      state.basket = state.basket.filter((item) => item.burger.name !== data.burger.name)
+    changeBasket(state, key) {
+      console.log("storeKey", state.basket)
+      state.basket = state.basket.filter((item) => item.key !== key)
     }
   },
   actions: {
@@ -23,8 +27,8 @@ const store = createStore({
     setBasket(context, data) {
       context.commit('pushBasket', data)
     },
-    removeBasket(context, data){
-      context.commit('changeBasket', data)
+    removeBasket(context, key){
+      context.commit('changeBasket', key)
     }
   }
 })

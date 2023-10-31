@@ -44,6 +44,8 @@ const drinkData = ref({
     price : null,
 })
 
+// const emit = defineEmits(['totalData']);
+
 //데이터 분기처리
 const selectData = (side = '비어 있음', drink = '비어 있음') => {
   console.log('select -> total', side, drink)
@@ -55,6 +57,8 @@ const selectData = (side = '비어 있음', drink = '비어 있음') => {
   typeof drink == 'object'
     ? (drinkData.value.name = drink.name) && (drinkData.value.price = drink.price)
     : (drinkData.value.name = drink) && (drinkData.value.price = '')
+
+    // emit('totalData', sideData, drinkData, totalPrice);
 }
 
 const totalPrice = computed(() => {

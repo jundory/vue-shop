@@ -8,8 +8,7 @@
       <div><img :src="burgerData.img" /></div>
 
       <div>
-        <!-- img위치 -->
-        <TotalPrice :burger-data="burgerData" ref="orderData"/>
+        <TotalPrice :burger-data="burgerData" ref="orderData"/> <!--  @totalData="testEmit"  -->
       </div>
       <!-- emit 두 번째 방법 -->
       <button @click="closeEmit">담기</button>
@@ -39,7 +38,9 @@ const store = useStore()
 
 const orderData = ref(null);
 const emit = defineEmits(['emitModal'])
+
 const closeEmit = () => {
+
   orderData.value = {
       burger : burgerData.value, 
       side : orderData.value.sideData, 
@@ -51,6 +52,15 @@ const closeEmit = () => {
   store.dispatch('setBasket', orderData.value);
   emit('emitModal', false);
 }
+
+// const testEmit = (side, drink, total) => {
+//   orderData.value = {
+//       burger : burgerData.value, 
+//       side : side, 
+//       drink : drink,
+//       total : total,
+//   }
+// }
 
 </script>
 
