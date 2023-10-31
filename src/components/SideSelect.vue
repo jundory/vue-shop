@@ -38,7 +38,6 @@ const drinkSel = ref()
 const emits = defineEmits('totalData')
 
 const chgData = () => {
-  console.log("dasdasd", sideSel.value)
   emits('totalData', sideSel?.value, drinkSel?.value)
 }
 </script>
