@@ -2,12 +2,24 @@
     <!-- 사용한 기능 : store(get,set), v-if/else, v-for  -->
     <div class="wrap">
             <h1>장바구니</h1>
-        <div class="inner-box" style="text-align:left">
+        <div class="inner-box" style="flex-wrap: wrap">
             <!-- 장바구니에 담은 아이템 반복 -->
-            <div class="container" v-if="items !== null">
+            <div v-if="items !== null">
 
-                <div v-for="item in items" :Key="item">
-                    {{ item }}
+                <div 
+                class="border-black" 
+                v-for="item in items" 
+                :Key="item" 
+                style="width:400px" >
+                    <img class="img-size" :src="item.burger.img"/>
+                    <span>햄버거 : {{ item.burger.name }}</span>
+                    <br />
+                    <span>사이드 : {{ item.side.name !== '비어 있음' ? item.side.name : "없음"}}</span>
+                    <br />
+                    <span>음료수 : {{ item.drink.name !== '비어 있음' ? item.drink.name : "없음"}}</span>
+                    <br />
+                    <span>총 가격 : {{ item.total }}원</span>
+                    <br />
                     <button @click="removeItem(item)"> 
                         삭제
                     </button>
@@ -31,13 +43,14 @@
     const store = useStore();
 
     const checkStore = () => {
+        console.log("어떻게 get함?", store.getters.getBasket);
         (store.getters.getBasket).length == 0 
         ? items.value = null 
-        : items.value = store.getters.getBasket
+        : items.value = store.getters.getBasket;
     }
     
     const removeItem = (remove) => {
-        store.commit('removeBasket', remove);
+        store.dispatch('removeBasket', remove);
         //삭제한거 화면에 반영
         checkStore()
         console.log("삭제 후 장바구니 품목",store.getters.getBasket)

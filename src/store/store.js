@@ -14,16 +14,19 @@ const store = createStore({
     pushBasket(state, value) {
       state.basket.push(value)
     },
-    removeBasket(state, value) {
-      state.basket = state.basket.filter((item) => item.name !== value.name)
+    changeBasket(state, data) {
+      state.basket = state.basket.filter((item) => item.burger.name !== data.burger.name)
     }
   },
-  action: {
+  actions: {
     //dispatch로 접근
-    setBasket(context) {
-      context.commit('pushBasket')
+    setBasket(context, data) {
+      context.commit('pushBasket', data)
+    },
+    removeBasket(context, data){
+      context.commit('changeBasket', data)
     }
   }
 })
 
-export default store
+export default store;

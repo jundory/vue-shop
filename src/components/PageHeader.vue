@@ -2,9 +2,9 @@
     <div class="wrap">
         <div class="inner-box">
             <img alt="Vue logo" class="logo" src="@/assets/logo.svg">
-            <div style="text-align:right; width: 50%">
+            <div>
                 <span> {{로그인}} </span>
-                <span @click="basket" >장바구니</span>
+                <span @click="basket" ><img src="@/assets/images/cart.png" style="margin-left:1080px"></span>
             </div>
         </div>
     </div>
@@ -27,8 +27,6 @@ const basket = () => {
 
 <style scoped>
 img {
-    width : 50%;
     height : 50px;
-    text-align: left;
 }
 </style>

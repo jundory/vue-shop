@@ -1,7 +1,12 @@
 <template>
   <div>
     <select v-model="sideSel" @change="chgData">
-      <option v-for="sideItem in sideData" :key="sideItem" :value="sideItem">
+      <option :value="undefined">선택 안함</option>
+      <option 
+        v-for="sideItem in sideData" 
+        :key="sideSelKey"
+        :value="sideItem"
+      >
         {{ sideItem.name }}
       </option>
     </select>
@@ -9,7 +14,12 @@
     <br />
 
     <select v-model="drinkSel" @change="chgData">
-      <option v-for="drinkItem in drinkData" :key="drinkItem" :value="drinkItem">
+      <option :value="undefined">선택 안함</option>
+      <option 
+        v-for="drinkItem in drinkData" 
+        :key="drinkSelKey" 
+        :value="drinkItem"
+      >
         {{ drinkItem.name }}
       </option>
     </select>
@@ -28,6 +38,7 @@ const drinkSel = ref()
 const emits = defineEmits('totalData')
 
 const chgData = () => {
+  console.log("dasdasd", sideSel.value)
   emits('totalData', sideSel?.value, drinkSel?.value)
 }
 </script>

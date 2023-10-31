@@ -4,10 +4,12 @@
     <!-- emit 첫 번째 방법 -->
     <div class="overlay" @click="$emit('emitModal', false)"></div>
     <div class="modal-card">
-      {{ propsData.name }}
+      {{ burgerData.name }}
+      <div><img :src="burgerData.img" /></div>
 
       <div>
-        <TotalPrice :burger-data="propsData" />
+        <!-- img위치 -->
+        <TotalPrice :burger-data="burgerData" ref="orderData"/>
       </div>
       <!-- emit 두 번째 방법 -->
       <button @click="closeEmit">담기</button>
@@ -18,25 +20,38 @@
 <script setup>
 import { onMounted, ref, defineProps, defineEmits } from 'vue'
 import { useStore } from 'vuex'
-
 import TotalPrice from '../components/TotalPrice.vue'
 
-onMounted(() => console.log('main -> modal', propsData.value))
+onMounted(() => console.log('main -> modal', burgerData.value))
+
 
 const props = defineProps({
   'burger-data': {
+    img: String,
     name: String,
     price: Number
   }
 })
-const propsData = ref(props.burgerData)
+const burgerData = ref(props.burgerData)
+
 
 const store = useStore()
+
+const orderData = ref(null);
 const emit = defineEmits(['emitModal'])
 const closeEmit = () => {
-  store.dispatch('setBasket', propsData.value)
-  emit('emitModal', false)
+  orderData.value = {
+      burger : burgerData.value, 
+      side : orderData.value.sideData, 
+      drink : orderData.value.drinkData,
+      total : orderData.value.totalPrice,
+  }
+  
+  console.log("modal->basket", orderData.value);
+  store.dispatch('setBasket', orderData.value);
+  emit('emitModal', false);
 }
+
 </script>
 
 <style scoped>

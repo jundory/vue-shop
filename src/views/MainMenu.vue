@@ -7,16 +7,24 @@
             @emitModal="closeModal"
             />
 
-            <div class="container">
+            <div class="inner-box" style="flex-wrap: wrap; width:70%">
                 <div 
                 v-for="burger in items" 
                 :key="burger"
+                class="border-black"
+                style="width:400px"
                 >
+                    <div>
+                        <img class="img-size" :src="burger.img">
+                    </div>
                     <div> 
-                    {{ burger }}
-                    <br/>
-                    <button @click="openModal(burger)"> 주문 </button>
-                     </div>
+                        {{ burger.name }}
+                        <br />
+                        {{ burger.price }}원
+                        <br/>
+                        <br/>
+                        <button @click="openModal(burger)"> 주문하기 </button>
+                    </div>
                 </div>
             </div>
     </div>
@@ -25,11 +33,12 @@
     import {reactive, ref} from 'vue'
     import Modal from '../Modal/OrderModal.vue'
     import {burgerArr} from '../common'
+
     // const printLog = ref(menu);
     const isToggle = ref(false);
     const modalData = ref('');
+    const items = reactive(burgerArr);   //가져온 버거배열
 
-    // onMounted(()=>console.log(printLog.value));
 
     const openModal = (burg) => {
         isToggle.value = true;
@@ -40,7 +49,6 @@
         isToggle.value = boolean;
     }
 
-    const items = reactive(burgerArr);   //가져온 버거배열
 </script>
 
 <style scoped>
@@ -56,4 +64,5 @@
         width: 1200px;
         margin: 0 auto;
     }
+
 </style>
